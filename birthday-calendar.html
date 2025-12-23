@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专属生日提醒日历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            min-height: 100vh;
+        }
+
+        /* 提醒区域样式 */
+        .remind-box {
+            width: 90%;
+            max-width: 600px;
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .remind-title {
+            color: #e65100;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .remind-content {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .no-remind {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* 日历容器样式 */
+        .calendar-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* 日历头部样式 */
+        .calendar-header {
+            background-color: #2196f3;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .month-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .month-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 星期栏样式 */
+        .week-bar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .week-item {
+            padding: 1rem;
+            text-align: center;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* 日期网格样式 */
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #e9ecef;
+        }
+
+        .date-item {
+            background-color: white;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .date-item:hover {
+            background-color: #f5f7fa;
+        }
+
+        .date-num {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 今日日期样式 */
+        .today {
+            background-color: #e3f2fd;
+        }
+
+        .today .date-num {
+            color: #2196f3;
+            font-weight: bold;
+            background-color: #2196f3;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 生日日期样式 */
+        .birthday-date {
+            background-color: #ffebee;
+        }
+
+        .birthday-name {
+            font-size: 0.8rem;
+            color: #e53935;
+            margin-top: 0.3rem;
+            line-height: 1.4;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* 空白日期样式 */
+        .empty-date {
+            background-color: #f8f9fa;
+        }
+
+        /* 响应式适配手机 */
+        @media (max-width: 480px) {
+            .remind-box {
+                padding: 0.8rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .remind-title {
+                font-size: 1rem;
+            }
+            .remind-content {
+                font-size: 0.95rem;
+            }
+            .calendar-header {
+                padding: 1rem;
+            }
+            .calendar-title {
+                font-size: 1.2rem;
+            }
+            .week-item {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            .date-item {
+                min-height: 70px;
+                padding: 0.8rem 0.3rem;
+            }
+            .date-num {
+                font-size: 1rem;
+            }
+            .birthday-name {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 生日提醒区域 -->
+    <div class="remind-box">
+        <div class="remind-title">🎂 明日生日提醒</div>
+        <div class="remind-content" id="remindContent">
+            暂无明日生日提醒
+        </div>
+    </div>
+
+    <!-- 日历容器 -->
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="month-btn" id="prevMonth">◀</button>
+            <h2 class="calendar-title" id="calendarTitle">2025年12月</h2>
+            <button class="month-btn" id="nextMonth">▶</button>
+        </div>
+        <div class="week-bar">
+            <div class="week-item">周日</div>
+            <div class="week-item">周一</div>
+            <div class="week-item">周二</div>
+            <div class="week-item">周三</div>
+            <div class="week-item">周四</div>
+            <div class="week-item">周五</div>
+            <div class="week-item">周六</div>
+        </div>
+        <div class="date-grid" id="dateGrid">
+            <!-- 日期通过JS动态生成 -->
+        </div>
+    </div>
+
+    <script>
+        // 1. 生日数据（整理你提供的人名和生日）
+        const birthdayList = [
+            { name: "南宁", birthday: "10.23" },
+            { name: "冯凡隽", birthday: "5.12" },
+            { name: "思琦", birthday: "7.14" },
+            { name: "沐阳", birthday: "5.14" },
+            { name: "彩虹", birthday: "5.9" },
+            { name: "若楷", birthday: "10.18" },
+            { name: "春希", birthday: "4.6" },
+            { name: "炜皓", birthday: "9.24" },
+            { name: "小童", birthday: "3.10" },
+            { name: "思皓", birthday: "3.1" },
+            { name: "闵芮", birthday: "6.21" },
+            { name: "徐晶", birthday: "11.5" },
+            { name: "崔迪", birthday: "4.10" },
+            { name: "原野", birthday: "11.4" }
+        ];
+
+        // 2. 当前显示的年月（初始为当前年月）
+        let currentShowYear = new Date().getFullYear();
+        let currentShowMonth = new Date().getMonth(); // 月份从0开始（0=1月，11=12月）
+
+        // 3. 生日前一天提醒功能
+        function checkBirthdayRemind() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1); // 明天的日期
+
+            const tomorrowMonth = tomorrow.getMonth() + 1; // 转换为1-12月
+            const tomorrowDay = tomorrow.getDate();
+            const tomorrowBirthday = [];
+
+            // 遍历生日列表，匹配明天的生日
+            birthdayList.forEach(item => {
+                const [birthMonth, birthDay] = item.birthday.split(".").map(Number);
+                if (birthMonth === tomorrowMonth && birthDay === tomorrowDay) {
+                    tomorrowBirthday.push(item.name);
+                }
+            });
+
+            // 更新提醒内容
+            const remindContent = document.getElementById("remindContent");
+            if (tomorrowBirthday.length > 0) {
+                remindContent.innerHTML = `明日是：<strong>${tomorrowBirthday.join("、")}</strong> 的生日，记得准备祝福哦！`;
+                remindContent.classList.remove("no-remind");
+            } else {
+                remindContent.innerHTML = "暂无明日生日提醒";
+                remindContent.classList.add("no-remind");
+            }
+        }
+
+        // 4. 渲染日历
+        function renderCalendar() {
+            const dateGrid = document.getElementById("dateGrid");
+            const calendarTitle = document.getElementById("calendarTitle");
+            dateGrid.innerHTML = ""; // 清空原有日期
+
+            // 更新日历标题
+            calendarTitle.textContent = `${currentShowYear}年${currentShowMonth + 1}月`;
+
+            // 获取当月第一天和最后一天
+            const firstDayOfMonth = new Date(currentShowYear, currentShowMonth, 1);
+            const lastDayOfMonth = new Date(currentShowYear, currentShowMonth + 1, 0);
+            const firstDayWeek = firstDayOfMonth.getDay(); // 当月第一天是星期几（0=周日，6=周六）
+            const totalDays = lastDayOfMonth.getDate(); // 当月总天数
+
+            // 获取今日日期（用于标记今日）
+            const today = new Date();
+            const todayYear = today.getFullYear();
+            const todayMonth = today.getMonth();
+            const todayDay = today.getDate();
+
+            // 1. 渲染当月第一天之前的空白格子
+            for (let i = 0; i < firstDayWeek; i++) {
+                const emptyItem = document.createElement("div");
+                emptyItem.className = "date-item empty-date";
+                dateGrid.appendChild(emptyItem);
+            }
+
+            // 2. 渲染当月日期
+            for (let day = 1; day <= totalDays; day++) {
+                const dateItem = document.createElement("div");
+                dateItem.className = "date-item";
+
+                // 标记今日
+                if (currentShowYear === todayYear && currentShowMonth === todayMonth && day === todayDay) {
+                    dateItem.classList.add("today");
+                }
+
+                // 检查当前日期是否有生日
+                const birthdayNames = [];
+                birthdayList.forEach(item => {
+                    const [birthMonth, birthDay] = item.birthday.split(".").map(Number);
+                    if (birthMonth === currentShowMonth + 1 && birthDay === day) {
+                        birthdayNames.push(item.name);
+                    }
+                });
+
+                // 标记生日日期
+                if (birthdayNames.length > 0) {
+                    dateItem.classList.add("birthday-date");
+                }
+
+                // 组装日期内容
+                dateItem.innerHTML = `
+                    <span class="date-num">${day}</span>
+                    ${birthdayNames.map(name => `<span class="birthday-name">${name}</span>`).join("")}
+                `;
+
+                dateGrid.appendChild(dateItem);
+            }
+        }
+
+        // 5. 绑定月份切换事件
+        function bindMonthSwitch() {
+            const prevMonthBtn = document.getElementById("prevMonth");
+            const nextMonthBtn = document.getElementById("nextMonth");
+
+            // 上一个月
+            prevMonthBtn.addEventListener("click", () => {
+                currentShowMonth--;
+                if (currentShowMonth < 0) {
+                    currentShowMonth = 11;
+                    currentShowYear--;
+                }
+                renderCalendar();
+            });
+
+            // 下一个月
+            nextMonthBtn.addEventListener("click", () => {
+                currentShowMonth++;
+                if (currentShowMonth > 11) {
+                    currentShowMonth = 0;
+                    currentShowYear++;
+                }
+                renderCalendar();
+            });
+        }
+
+        // 页面加载完成后初始化
+        window.onload = function() {
+            checkBirthdayRemind(); // 初始化提醒
+            renderCalendar(); // 初始化日历
+            bindMonthSwitch(); // 绑定切换事件
+        };
+    </script>
+</body>
+</html>
