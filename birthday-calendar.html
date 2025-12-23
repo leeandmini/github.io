@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #181a1f; -webkit-text-stroke: #181a1f; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #181a1f; -webkit-text-stroke: #181a1f; background-color: #ffffff; min-height: 18.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="zh-CN"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;专属生日提醒日历&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>* {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: "Microsoft YaHei", Arial, sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #f5f7fa;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex-direction: column;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 2rem 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 100vh;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 提醒区域样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remind-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 90%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 600px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #fff8e1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 2px solid #ffc107;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 1rem 1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remind-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #e65100;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remind-content {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #333;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.no-remind {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #666;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-style: italic;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 日历容器样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.calendar-container {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 90%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 600px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 日历头部样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.calendar-header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #2196f3;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.calendar-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.month-btn {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: rgba(255, 255, 255, 0.2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.month-btn:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: rgba(255, 255, 255, 0.4);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 星期栏样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.week-bar {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: grid;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(7, 1fr);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #f8f9fa;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #e9ecef;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.week-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #666;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 日期网格样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.date-grid {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: grid;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(7, 1fr);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #e9ecef;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.date-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 1rem 0.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 80px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex-direction: column;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: flex-start;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: relative;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.date-item:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #f5f7fa;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.date-num {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 今日日期样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.today {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #e3f2fd;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.today .date-num {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #2196f3;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #2196f3;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 生日日期样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.birthday-date {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #ffebee;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.birthday-name {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #e53935;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: 0.3rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.4;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-overflow: ellipsis;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 空白日期样式 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.empty-date {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #f8f9fa;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 响应式适配手机 */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@media (max-width: 480px) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.remind-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>padding: 0.8rem 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>margin-bottom: 1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.remind-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.remind-content {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 0.95rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.calendar-header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>padding: 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.calendar-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.week-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>padding: 0.8rem 0.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 0.9rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.date-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>min-height: 70px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>padding: 0.8rem 0.3rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.date-num {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.birthday-name {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>font-size: 0.7rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 生日提醒区域 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="remind-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="remind-title"&gt;🎂 明日生日提醒&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="remind-content" id="remindContent"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>暂无明日生日提醒</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 日历容器 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="calendar-container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="calendar-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="month-btn" id="prevMonth"&gt;◀&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="calendar-title" id="calendarTitle"&gt;2025年12月&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="month-btn" id="nextMonth"&gt;▶&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="week-bar"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周日&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周一&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周二&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周三&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周四&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周五&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="week-item"&gt;周六&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="date-grid" id="dateGrid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 日期通过JS动态生成 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 1. 生日数据（整理你提供的人名和生日）</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const birthdayList = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "南宁", birthday: "10.23" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "冯凡隽", birthday: "5.12" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "思琦", birthday: "7.14" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "沐阳", birthday: "5.14" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "彩虹", birthday: "5.9" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "若楷", birthday: "10.18" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "春希", birthday: "4.6" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "炜皓", birthday: "9.24" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "小童", birthday: "3.10" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "思皓", birthday: "3.1" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "闵芮", birthday: "6.21" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "徐晶", birthday: "11.5" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "崔迪", birthday: "4.10" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "原野", birthday: "11.4" }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 2. 当前显示的年月（初始为当前年月）</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let currentShowYear = new Date().getFullYear();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let currentShowMonth = new Date().getMonth(); // 月份从0开始（0=1月，11=12月）</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 3. 生日前一天提醒功能</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function checkBirthdayRemind() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const today = new Date();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const tomorrow = new Date(today);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>tomorrow.setDate(tomorrow.getDate() + 1); // 明天的日期</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const tomorrowMonth = tomorrow.getMonth() + 1; // 转换为1-12月</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const tomorrowDay = tomorrow.getDate();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const tomorrowBirthday = [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 遍历生日列表，匹配明天的生日</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>birthdayList.forEach(item =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const [birthMonth, birthDay] = item.birthday.split(".").map(Number);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (birthMonth === tomorrowMonth &amp;&amp; birthDay === tomorrowDay) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>tomorrowBirthday.push(item.name);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 更新提醒内容</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const remindContent = document.getElementById("remindContent");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (tomorrowBirthday.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>remindContent.innerHTML = `明日是：&lt;strong&gt;${tomorrowBirthday.join("、")}&lt;/strong&gt; 的生日，记得准备祝福哦！`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>remindContent.classList.remove("no-remind");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>remindContent.innerHTML = "暂无明日生日提醒";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>remindContent.classList.add("no-remind");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 4. 渲染日历</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function renderCalendar() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const dateGrid = document.getElementById("dateGrid");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const calendarTitle = document.getElementById("calendarTitle");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dateGrid.innerHTML = ""; // 清空原有日期</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 更新日历标题</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>calendarTitle.textContent = `${currentShowYear}年${currentShowMonth + 1}月`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 获取当月第一天和最后一天</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const firstDayOfMonth = new Date(currentShowYear, currentShowMonth, 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const lastDayOfMonth = new Date(currentShowYear, currentShowMonth + 1, 0);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const firstDayWeek = firstDayOfMonth.getDay(); // 当月第一天是星期几（0=周日，6=周六）</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const totalDays = lastDayOfMonth.getDate(); // 当月总天数</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 获取今日日期（用于标记今日）</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const today = new Date();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const todayYear = today.getFullYear();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const todayMonth = today.getMonth();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const todayDay = today.getDate();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 1. 渲染当月第一天之前的空白格子</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; firstDayWeek; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const emptyItem = document.createElement("div");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>emptyItem.className = "date-item empty-date";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>dateGrid.appendChild(emptyItem);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 2. 渲染当月日期</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let day = 1; day &lt;= totalDays; day++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dateItem = document.createElement("div");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>dateItem.className = "date-item";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 标记今日</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (currentShowYear === todayYear &amp;&amp; currentShowMonth === todayMonth &amp;&amp; day === todayDay) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>dateItem.classList.add("today");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 检查当前日期是否有生日</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const birthdayNames = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>birthdayList.forEach(item =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const [birthMonth, birthDay] = item.birthday.split(".").map(Number);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (birthMonth === currentShowMonth + 1 &amp;&amp; birthDay === day) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>birthdayNames.push(item.name);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 标记生日日期</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (birthdayNames.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>dateItem.classList.add("birthday-date");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// 组装日期内容</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>dateItem.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="date-num"&gt;${day}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>${birthdayNames.map(name =&gt; `&lt;span class="birthday-name"&gt;${name}&lt;/span&gt;`).join("")}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>dateGrid.appendChild(dateItem);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 5. 绑定月份切换事件</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function bindMonthSwitch() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const prevMonthBtn = document.getElementById("prevMonth");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const nextMonthBtn = document.getElementById("nextMonth");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 上一个月</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>prevMonthBtn.addEventListener("click", () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>currentShowMonth--;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (currentShowMonth &lt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentShowMonth = 11;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentShowYear--;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderCalendar();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 下一个月</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>nextMonthBtn.addEventListener("click", () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>currentShowMonth++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (currentShowMonth &gt; 11) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentShowMonth = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>currentShowYear++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderCalendar();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 页面加载完成后初始化</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.onload = function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>checkBirthdayRemind(); // 初始化提醒</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderCalendar(); // 初始化日历</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>bindMonthSwitch(); // 绑定切换事件</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
